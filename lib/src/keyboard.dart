@@ -271,6 +271,7 @@ class _VirtualKeyboardState extends State<VirtualKeyboard> {
             _onKeyPress(key);
           },
           child: Container(
+            margin: EdgeInsets.all(4),
             height: height / customLayoutKeys.activeLayout.length,
             decoration: BoxDecoration(
               shape: BoxShape.rectangle,
@@ -319,6 +320,7 @@ class _VirtualKeyboardState extends State<VirtualKeyboard> {
             child: Container(
               height: double.infinity,
               width: double.infinity,
+              margin: EdgeInsets.all(4),
               decoration: BoxDecoration(
                 shape: BoxShape.rectangle,
                 borderRadius: BorderRadius.circular(10),
@@ -332,36 +334,15 @@ class _VirtualKeyboardState extends State<VirtualKeyboard> {
             ));
         break;
       case VirtualKeyboardKeyAction.Shift:
-        actionKey = Container(
-          decoration: BoxDecoration(
-            shape: BoxShape.rectangle,
-            borderRadius: BorderRadius.circular(10),
-            border:Border.all(color: borderColor)
-          ),
-          child: Icon(Icons.arrow_upward, color: textColor)
-        );
+        actionKey = Icon(Icons.arrow_upward, color: textColor);
         break;
       case VirtualKeyboardKeyAction.Space:
-        actionKey = actionKey = Container(
-          decoration: BoxDecoration(
-            shape: BoxShape.rectangle,
-            borderRadius: BorderRadius.circular(10),
-            border:Border.all(color: borderColor)
-          ),
-          child: Icon(Icons.space_bar, color: textColor)
-        );
+        actionKey = actionKey = Icon(Icons.space_bar, color: textColor);
         break;
       case VirtualKeyboardKeyAction.Return:
-        actionKey = Container(
-          decoration: BoxDecoration(
-            shape: BoxShape.rectangle,
-            borderRadius: BorderRadius.circular(10),
-            border:Border.all(color: borderColor)
-          ),
-          child: Icon(
-            Icons.keyboard_return,
-            color: textColor,
-          ),
+        actionKey = Icon(
+          Icons.keyboard_return,
+          color: textColor,
         );
         break;
       case VirtualKeyboardKeyAction.SwithLanguage:
@@ -374,12 +355,6 @@ class _VirtualKeyboardState extends State<VirtualKeyboard> {
             child: Container(
               height: double.infinity,
               width: double.infinity,
-              decoration: BoxDecoration(
-                shape: BoxShape.rectangle,
-                borderRadius: BorderRadius.circular(10),
-                border:Border.all(color: borderColor)
-
-              ),
               child: Icon(
                 Icons.language,
                 color: textColor,
@@ -403,11 +378,6 @@ class _VirtualKeyboardState extends State<VirtualKeyboard> {
       child: Container(
         alignment: Alignment.center,
         height: height / customLayoutKeys.activeLayout.length,
-        decoration: BoxDecoration(
-          shape: BoxShape.rectangle,
-          borderRadius: BorderRadius.circular(10),
-          border:Border.all(color: borderColor)
-        ),
         child: actionKey,
       ),
     );
