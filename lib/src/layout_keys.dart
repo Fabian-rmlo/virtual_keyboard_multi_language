@@ -77,8 +77,7 @@ const List<List> _defaultEnglishLayout = [
     'j',
     'k',
     'l',
-    ';',
-    '\'',
+    'ñ',
     VirtualKeyboardKeyAction.Return
   ],
   // Row 4
@@ -91,18 +90,14 @@ const List<List> _defaultEnglishLayout = [
     'b',
     'n',
     'm',
-    ',',
     '.',
-    '/',
+    '@',
+    '_',
     VirtualKeyboardKeyAction.Shift
   ],
   // Row 5
   const [
-    VirtualKeyboardKeyAction.SwithLanguage,
-    '@',
     VirtualKeyboardKeyAction.Space,
-    '&',
-    '_',
   ]
 ];
 

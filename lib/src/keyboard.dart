@@ -266,26 +266,28 @@ class _VirtualKeyboardState extends State<VirtualKeyboard> {
   /// Creates default UI element for keyboard Key.
   Widget _keyboardDefaultKey(VirtualKeyboardKey key) {
     return Expanded(
-        child: InkWell(
-          onTap: () {
-            _onKeyPress(key);
-          },
-          child: Container(
-            margin: EdgeInsets.all(4),
-            height: height / customLayoutKeys.activeLayout.length,
-            decoration: BoxDecoration(
-              shape: BoxShape.rectangle,
-              borderRadius: BorderRadius.circular(10),
-              border:Border.all(color: borderColor)
-
+        child: Padding(
+          padding: const EdgeInsets.all(4),
+          child: InkWell(
+            onTap: () {
+              _onKeyPress(key);
+            },
+            child: Container(
+              height: height / customLayoutKeys.activeLayout.length,
+              decoration: BoxDecoration(
+                shape: BoxShape.rectangle,
+                borderRadius: BorderRadius.circular(10),
+                border:Border.all(color: borderColor)
+          
+              ),
+              child: Center(
+                  child: Text(
+                alwaysCaps
+                    ? key.capsText ?? ''
+                    : (isShiftEnabled ? key.capsText : key.text) ?? '',
+                style: textStyle,
+              )),
             ),
-            child: Center(
-                child: Text(
-              alwaysCaps
-                  ? key.capsText ?? ''
-                  : (isShiftEnabled ? key.capsText : key.text) ?? '',
-              style: textStyle,
-            )),
           ),
         ));
   }
