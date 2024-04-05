@@ -267,7 +267,7 @@ class _VirtualKeyboardState extends State<VirtualKeyboard> {
   Widget _keyboardDefaultKey(VirtualKeyboardKey key) {
     return Expanded(
         child: Padding(
-          padding: const EdgeInsets.all(4),
+          padding: const EdgeInsets.all(2),
           child: InkWell(
             onTap: () {
               _onKeyPress(key);
@@ -300,34 +300,42 @@ class _VirtualKeyboardState extends State<VirtualKeyboard> {
     // Switch the action type to build action Key widget.
     switch (key.action ?? VirtualKeyboardKeyAction.SwithLanguage) {
       case VirtualKeyboardKeyAction.Backspace:
-        actionKey = GestureDetector(
-            onLongPress: () {
-              longPress = true;
-              // Start sending backspace key events while longPress is true
-              Timer.periodic(
-                  Duration(milliseconds: _virtualKeyboardBackspaceEventPerioud),
-                  (timer) {
-                if (longPress) {
-                  _onKeyPress(key);
-                } else {
-                  // Cancel timer.
-                  timer.cancel();
-                }
-              });
-            },
-            onLongPressUp: () {
-              // Cancel event loop
-              longPress = false;
-            },
-            child: Container(
-              height: double.infinity,
-              width: double.infinity,
-              margin: EdgeInsets.all(4),
-              child: Icon(
-                Icons.backspace,
-                color: textColor,
-              ),
-            ));
+        actionKey = Padding(
+          padding: const EdgeInsets.all(2),
+          child: GestureDetector(
+              onLongPress: () {
+                longPress = true;
+                // Start sending backspace key events while longPress is true
+                Timer.periodic(
+                    Duration(milliseconds: _virtualKeyboardBackspaceEventPerioud),
+                    (timer) {
+                  if (longPress) {
+                    _onKeyPress(key);
+                  } else {
+                    // Cancel timer.
+                    timer.cancel();
+                  }
+                });
+              },
+              onLongPressUp: () {
+                // Cancel event loop
+                longPress = false;
+              },
+              child: Container(
+                height: double.infinity,
+                width: double.infinity,
+                decoration: BoxDecoration(
+                  shape: BoxShape.rectangle,
+                  borderRadius: BorderRadius.circular(10),
+                  border:Border.all(color: borderColor)
+            
+                ),
+                child: Icon(
+                  Icons.backspace,
+                  color: textColor,
+                ),
+              )),
+        );
         break;
       case VirtualKeyboardKeyAction.Shift:
         actionKey = Icon(Icons.arrow_upward, color: textColor);
