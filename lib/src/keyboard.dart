@@ -26,6 +26,9 @@ class VirtualKeyboard extends StatefulWidget {
   /// Font size for keyboard keys.
   final double fontSize;
 
+  /// Key border color
+  final Color? borderColor;
+
   /// the custom layout for multi or single language
   final VirtualKeyboardLayoutKeys? customLayoutKeys;
 
@@ -58,6 +61,7 @@ class VirtualKeyboard extends StatefulWidget {
       this.height = _virtualKeyboardDefaultHeight,
       this.textColor = Colors.black,
       this.fontSize = 14,
+      this.borderColor = Colors.black,
       this.alwaysCaps = false})
       : super(key: key);
 
@@ -78,6 +82,7 @@ class _VirtualKeyboardState extends State<VirtualKeyboard> {
   double? width;
   late Color textColor;
   late double fontSize;
+  late Color borderColor;
   late bool alwaysCaps;
   late bool reverseLayout;
   late VirtualKeyboardLayoutKeys customLayoutKeys;
@@ -130,6 +135,7 @@ class _VirtualKeyboardState extends State<VirtualKeyboard> {
       width = widget.width;
       textColor = widget.textColor;
       fontSize = widget.fontSize;
+      borderColor = widget.borderColor!;
       alwaysCaps = widget.alwaysCaps;
       reverseLayout = widget.reverseLayout;
       textController = widget.textController ?? textController;
@@ -157,6 +163,7 @@ class _VirtualKeyboardState extends State<VirtualKeyboard> {
     height = widget.height;
     textColor = widget.textColor;
     fontSize = widget.fontSize;
+    borderColor = widget.borderColor!;
     alwaysCaps = widget.alwaysCaps;
     reverseLayout = widget.reverseLayout;
     // Init the Text Style for keys.
@@ -260,20 +267,26 @@ class _VirtualKeyboardState extends State<VirtualKeyboard> {
   Widget _keyboardDefaultKey(VirtualKeyboardKey key) {
     return Expanded(
         child: InkWell(
-      onTap: () {
-        _onKeyPress(key);
-      },
-      child: Container(
-        height: height / customLayoutKeys.activeLayout.length,
-        child: Center(
-            child: Text(
-          alwaysCaps
-              ? key.capsText ?? ''
-              : (isShiftEnabled ? key.capsText : key.text) ?? '',
-          style: textStyle,
-        )),
-      ),
-    ));
+          onTap: () {
+            _onKeyPress(key);
+          },
+          child: Container(
+            height: height / customLayoutKeys.activeLayout.length,
+            decoration: BoxDecoration(
+              shape: BoxShape.rectangle,
+              borderRadius: BorderRadius.circular(10),
+              border:Border.all(color: borderColor)
+
+            ),
+            child: Center(
+                child: Text(
+              alwaysCaps
+                  ? key.capsText ?? ''
+                  : (isShiftEnabled ? key.capsText : key.text) ?? '',
+              style: textStyle,
+            )),
+          ),
+        ));
   }
 
   /// Creates default UI element for keyboard Action Key.
@@ -306,6 +319,12 @@ class _VirtualKeyboardState extends State<VirtualKeyboard> {
             child: Container(
               height: double.infinity,
               width: double.infinity,
+              decoration: BoxDecoration(
+                shape: BoxShape.rectangle,
+                borderRadius: BorderRadius.circular(10),
+                border:Border.all(color: borderColor)
+
+              ),
               child: Icon(
                 Icons.backspace,
                 color: textColor,
@@ -313,15 +332,36 @@ class _VirtualKeyboardState extends State<VirtualKeyboard> {
             ));
         break;
       case VirtualKeyboardKeyAction.Shift:
-        actionKey = Icon(Icons.arrow_upward, color: textColor);
+        actionKey = Container(
+          decoration: BoxDecoration(
+            shape: BoxShape.rectangle,
+            borderRadius: BorderRadius.circular(10),
+            border:Border.all(color: borderColor)
+          ),
+          child: Icon(Icons.arrow_upward, color: textColor)
+        );
         break;
       case VirtualKeyboardKeyAction.Space:
-        actionKey = actionKey = Icon(Icons.space_bar, color: textColor);
+        actionKey = actionKey = Container(
+          decoration: BoxDecoration(
+            shape: BoxShape.rectangle,
+            borderRadius: BorderRadius.circular(10),
+            border:Border.all(color: borderColor)
+          ),
+          child: Icon(Icons.space_bar, color: textColor)
+        );
         break;
       case VirtualKeyboardKeyAction.Return:
-        actionKey = Icon(
-          Icons.keyboard_return,
-          color: textColor,
+        actionKey = Container(
+          decoration: BoxDecoration(
+            shape: BoxShape.rectangle,
+            borderRadius: BorderRadius.circular(10),
+            border:Border.all(color: borderColor)
+          ),
+          child: Icon(
+            Icons.keyboard_return,
+            color: textColor,
+          ),
         );
         break;
       case VirtualKeyboardKeyAction.SwithLanguage:
@@ -334,6 +374,12 @@ class _VirtualKeyboardState extends State<VirtualKeyboard> {
             child: Container(
               height: double.infinity,
               width: double.infinity,
+              decoration: BoxDecoration(
+                shape: BoxShape.rectangle,
+                borderRadius: BorderRadius.circular(10),
+                border:Border.all(color: borderColor)
+
+              ),
               child: Icon(
                 Icons.language,
                 color: textColor,
@@ -357,6 +403,11 @@ class _VirtualKeyboardState extends State<VirtualKeyboard> {
       child: Container(
         alignment: Alignment.center,
         height: height / customLayoutKeys.activeLayout.length,
+        decoration: BoxDecoration(
+          shape: BoxShape.rectangle,
+          borderRadius: BorderRadius.circular(10),
+          border:Border.all(color: borderColor)
+        ),
         child: actionKey,
       ),
     );
