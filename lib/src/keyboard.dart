@@ -321,12 +321,6 @@ class _VirtualKeyboardState extends State<VirtualKeyboard> {
               height: double.infinity,
               width: double.infinity,
               margin: EdgeInsets.all(4),
-              decoration: BoxDecoration(
-                shape: BoxShape.rectangle,
-                borderRadius: BorderRadius.circular(10),
-                border:Border.all(color: borderColor)
-
-              ),
               child: Icon(
                 Icons.backspace,
                 color: textColor,
