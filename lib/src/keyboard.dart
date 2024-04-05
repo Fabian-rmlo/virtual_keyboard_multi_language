@@ -266,28 +266,25 @@ class _VirtualKeyboardState extends State<VirtualKeyboard> {
   /// Creates default UI element for keyboard Key.
   Widget _keyboardDefaultKey(VirtualKeyboardKey key) {
     return Expanded(
-        child: Padding(
-          padding: const EdgeInsets.all(2),
-          child: InkWell(
-            onTap: () {
-              _onKeyPress(key);
-            },
-            child: Container(
-              height: height / customLayoutKeys.activeLayout.length,
-              decoration: BoxDecoration(
-                shape: BoxShape.rectangle,
-                borderRadius: BorderRadius.circular(10),
-                border:Border.all(color: borderColor)
-          
-              ),
-              child: Center(
-                  child: Text(
-                alwaysCaps
-                    ? key.capsText ?? ''
-                    : (isShiftEnabled ? key.capsText : key.text) ?? '',
-                style: textStyle,
-              )),
+        child: InkWell(
+          onTap: () {
+            _onKeyPress(key);
+          },
+          child: Container(
+            height: height / customLayoutKeys.activeLayout.length,
+            decoration: BoxDecoration(
+              shape: BoxShape.rectangle,
+              borderRadius: BorderRadius.circular(10),
+              border:Border.all(color: borderColor)
+        
             ),
+            child: Center(
+                child: Text(
+              alwaysCaps
+                  ? key.capsText ?? ''
+                  : (isShiftEnabled ? key.capsText : key.text) ?? '',
+              style: textStyle,
+            )),
           ),
         ));
   }
@@ -300,42 +297,39 @@ class _VirtualKeyboardState extends State<VirtualKeyboard> {
     // Switch the action type to build action Key widget.
     switch (key.action ?? VirtualKeyboardKeyAction.SwithLanguage) {
       case VirtualKeyboardKeyAction.Backspace:
-        actionKey = Padding(
-          padding: const EdgeInsets.all(2),
-          child: GestureDetector(
-              onLongPress: () {
-                longPress = true;
-                // Start sending backspace key events while longPress is true
-                Timer.periodic(
-                    Duration(milliseconds: _virtualKeyboardBackspaceEventPerioud),
-                    (timer) {
-                  if (longPress) {
-                    _onKeyPress(key);
-                  } else {
-                    // Cancel timer.
-                    timer.cancel();
-                  }
-                });
-              },
-              onLongPressUp: () {
-                // Cancel event loop
-                longPress = false;
-              },
-              child: Container(
-                height: double.infinity,
-                width: double.infinity,
-                decoration: BoxDecoration(
-                  shape: BoxShape.rectangle,
-                  borderRadius: BorderRadius.circular(10),
-                  border:Border.all(color: borderColor)
-            
-                ),
-                child: Icon(
-                  Icons.backspace,
-                  color: textColor,
-                ),
-              )),
-        );
+        actionKey = GestureDetector(
+            onLongPress: () {
+              longPress = true;
+              // Start sending backspace key events while longPress is true
+              Timer.periodic(
+                  Duration(milliseconds: _virtualKeyboardBackspaceEventPerioud),
+                  (timer) {
+                if (longPress) {
+                  _onKeyPress(key);
+                } else {
+                  // Cancel timer.
+                  timer.cancel();
+                }
+              });
+            },
+            onLongPressUp: () {
+              // Cancel event loop
+              longPress = false;
+            },
+            child: Container(
+              height: double.infinity,
+              width: double.infinity,
+              decoration: BoxDecoration(
+                shape: BoxShape.rectangle,
+                borderRadius: BorderRadius.circular(10),
+                border:Border.all(color: borderColor)
+          
+              ),
+              child: Icon(
+                Icons.backspace,
+                color: textColor,
+              ),
+            ));
         break;
       case VirtualKeyboardKeyAction.Shift:
         actionKey = Icon(Icons.arrow_upward, color: textColor);
