@@ -267,7 +267,7 @@ class _VirtualKeyboardState extends State<VirtualKeyboard> {
   Widget _keyboardDefaultKey(VirtualKeyboardKey key) {
     return Expanded(
         child: Padding(
-          padding: const EdgeInsets.all(2),
+          padding: const EdgeInsets.all(1),
           child: InkWell(
             onTap: () {
               _onKeyPress(key);
@@ -301,7 +301,7 @@ class _VirtualKeyboardState extends State<VirtualKeyboard> {
     switch (key.action ?? VirtualKeyboardKeyAction.SwithLanguage) {
       case VirtualKeyboardKeyAction.Backspace:
         actionKey = Padding(
-          padding: const EdgeInsets.all(2),
+          padding: const EdgeInsets.all(1),
           child: GestureDetector(
               onLongPress: () {
                 longPress = true;
